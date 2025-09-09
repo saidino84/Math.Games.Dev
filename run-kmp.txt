@@ -1,0 +1,9 @@
+Acao tomada
+2025-09-04 07:07:37.232081-The second line
+
+./gradlew run
+./gradlew hotRunJvm
+./gradlew jsBrowserDevelopmentRun
+./gradlew hotRunJvmMain
+./gradlew :composeApp:hotRunJvm --auto
+s

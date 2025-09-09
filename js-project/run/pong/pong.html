@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUN AND JUMP</title>
+    <style>
+        body{
+            background-color: rgb(21, 129, 223);
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            align-items:center ;
+            flex-direction: column;
+            color: aliceblue;
+            font-size: 23pt;
+        }
+        #cnv{
+            border-bottom: 2px dashed rgb(5, 226, 255);
+        }
+        .btn{
+            width:130px;height:45px;background:#ff7466;
+            border-radius:30px;
+            box-shadow: black 20px;
+            border: None;
+            border-bottom: 3px solid black;font-size: 13PT;color: aliceblue;
+            box-shadow: 25px ;
+
+        }
+        .btn:hover{
+            background:#07cc66;
+            font-size: 15pt;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="res" id="res">0:0</div>
+    <canvas id="cnv" class="cnv" height=500 width=840></canvas> /
+    <div>
+        <button class= 'btn' id= 'r-btn'> RESET</button>
+        <p id="res2">res</p>
+    </div>
+
+</body>
+<script  src="pong.js">
+</script>
+</html>

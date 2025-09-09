@@ -1,0 +1,119 @@
+Perfeito, Tylorguy! Vamos criar um mini jogo educativo em **HTML** com **Canvas e JavaScript**, aplicando os conceitos de física (como gravidade e impulso) e usando funções de escopo Kotlin-style com `let`, `apply`, `run` e `also` — só que traduzidas em boas práticas JS. E tudo em **um único arquivo HTML**, bem comentado pra qualquer júnior acompanhar.
+
+---
+
+### 🎮 Tema: “Pulo do Kotliniano”
+
+**Objetivo:** O herói pula, é puxado pela gravidade, ganha velocidade e energia extra com uma habilidade especial.
+
+---
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Pulo do Kotliniano</title>
+  <style>
+    canvas {
+      border: 2px solid #333;
+      background-color: #f0f0f0;
+      display: block;
+      margin: 40px auto;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="jogo" width="600" height="400"></canvas>
+
+<script>
+// 🎮 CONFIGURAÇÃO INICIAL DO HERÓI
+const heroi = {
+  nome: "Tylorguy",
+  energia: 100,
+  velocidade: 2,
+  posY: 300,          // posição vertical no canvas (começa no chão)
+  altura: 50,
+  largura: 50,
+  cor: "blue"
+};
+
+// ⚙️ CONFIGURAÇÃO FÍSICA
+const gravidade = 0.8;
+let velocidadeY = 0;
+let pulando = false;
+const impulso = -15;  // força do pulo para cima
+
+// 🎨 CONFIGURAÇÃO DO CANVAS
+const canvas = document.getElementById("jogo");
+const ctx = canvas.getContext("2d");
+
+// 🧠 FUNÇÃO: Desenha o herói na posição atual
+function desenharHeroi() {
+  ctx.fillStyle = heroi.cor;
+  ctx.fillRect(100, heroi.posY, heroi.largura, heroi.altura);
+}
+
+// 🔄 FUNÇÃO: Atualiza física e tela a cada frame
+function atualizarJogo() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height); // limpa a tela
+
+  // 🧠 Gravidade: aplica força para baixo se estiver no ar
+  if (heroi.posY < 300) {
+    velocidadeY += gravidade;
+    pulando = true;
+  } else {
+    velocidadeY = 0;
+    heroi.posY = 300;
+    pulando = false;
+  }
+
+  heroi.posY += velocidadeY;
+
+  desenharHeroi();
+  requestAnimationFrame(atualizarJogo);
+}
+
+// ⌨️ CONTROLE: Tecla para pular ou ativar turbo
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space" && !pulando) {
+    // 🦘 Pular (simulando let { ... })
+    heroi.posY += impulso;
+    console.log(`🦘 ${heroi.nome} pulou!`);
+  }
+
+  if (e.code === "KeyT") {
+    // ⚡ Turbo: simula also + apply
+    console.log(`⚡ ${heroi.nome} ativou o modo Turbo!`);
+    heroi.velocidade *= 2;
+    heroi.energia -= 10;
+    heroi.cor = "red";  // visualmente indica modo turbo
+
+    // Volta ao normal após 2 segundos
+    setTimeout(() => {
+      heroi.velocidade /= 2;
+      heroi.cor = "blue";
+      console.log(`⏱️ Turbo acabou. Velocidade atual: ${heroi.velocidade}`);
+    }, 2000);
+  }
+});
+
+// 🔁 Inicia o loop do jogo
+atualizarJogo();
+</script>
+
+</body>
+</html>
+```
+
+---
+
+### 🧠 O que um júnior aprende aqui:
+- Como usar `Canvas` para desenhar objetos.
+- Como simular **pulo com física** (impulso e gravidade).
+- Como aplicar **efeitos temporários** como turbo usando `setTimeout`.
+- Como usar comentários como analogia às funções Kotlin `let`, `apply`, `also`.
+- Como usar `keydown` para controle com o teclado.
+
+Quer que a gente adicione colisão com obstáculos, pontuação ou até efeitos sonoros para tornar essa jornada ainda mais épica? Posso ir turbinando conforme você quiser! 🚀

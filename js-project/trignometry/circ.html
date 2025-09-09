@@ -1,0 +1,58 @@
+<canvas id="cnv" width="400" height="400" style="background: #002D24;"></canvas>
+<input type="range" id="slider" min="0" max="360" value="0">
+<label id="label">Ângulo: 0°</label>
+
+<script>
+  const cnv = document.getElementById("cnv");
+  const ctx = cnv.getContext("2d");
+  const center = { x: cnv.width / 2, y: cnv.height / 2 };
+  const length = 100;
+
+  const slider = document.getElementById("slider");
+  const label = document.getElementById("label");
+
+  function drawPointer(graus) {
+    const angle = graus * Math.PI / 180; // Converter graus para radianos
+
+    // Limpar
+    ctx.clearRect(0, 0, cnv.width, cnv.height);
+
+    // Calcular ponta da linha
+    const x = center.x + Math.cos(angle) * length;
+    const y = center.y - Math.sin(angle) * length;
+
+    // Eixos
+    ctx.strokeStyle = "gray";
+    ctx.beginPath();
+    ctx.moveTo(0, center.y);
+    ctx.lineTo(cnv.width, center.y);
+    ctx.moveTo(center.x, 0);
+    ctx.lineTo(center.x, cnv.height);
+    ctx.stroke();
+
+    // Centro
+    ctx.beginPath();
+    ctx.arc(center.x, center.y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = "red";
+    ctx.fill();
+
+    // Linha (ponteiro)
+    ctx.beginPath();
+    ctx.moveTo(center.x, center.y);
+    ctx.lineTo(x, y);
+    ctx.strokeStyle = "blue";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // Atualizar texto do ângulo
+}
+
+// Atualizar ao mover o slider
+slider.addEventListener("input", (e) => {
+    console.log("SLIDING")
+    drawPointer(Number(e.target.value));
+    label.innerText = `Ângulo: ${graus}°`;
+  });
+
+  drawPointer(0); // Inicializar
+</script>
