@@ -24,6 +24,7 @@ let gravity_animation ={
     }
 };
 
+// this code pushed inside an object
 const game ={
     box: box,
     gravity: 0.5,
